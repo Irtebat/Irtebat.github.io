@@ -112,9 +112,9 @@ const config = {
         additionalLanguages: ['bash', 'yaml', 'json', 'python', 'java', 'javascript', 'typescript'],
       },
       colorMode: {
-        defaultMode: 'dark',
-        disableSwitch: false,
-        respectPrefersColorScheme: true,
+        defaultMode: 'light',
+        disableSwitch: true,
+        respectPrefersColorScheme: false,
       },
     }),
 };

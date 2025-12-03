@@ -459,7 +459,7 @@ p, li {
 
 .comic-feature-box h3 {
   background: var(--ifm-font-color-base);
-  color: #fff;
+  color: var(--ifm-background-color); /* Changed from #fff to match LATEST ISSUES */
   display: inline-block;
   padding: 0.5rem 1rem;
   font-family: var(--font-comic-body);
