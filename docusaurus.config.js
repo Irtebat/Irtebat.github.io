@@ -77,9 +77,9 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'mentalModels',
+            sidebarId: 'concepts',
             position: 'left',
-            label: 'Mental Models',
+            label: 'Concepts',
           },
           {
             type: 'docSidebar',
@@ -92,12 +92,6 @@ const config = {
             sidebarId: 'systemDesign',
             position: 'left',
             label: 'System Design',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'experiments',
-            position: 'left',
-            label: 'Experiments',
           },
         ],
       },

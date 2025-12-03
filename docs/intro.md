@@ -53,10 +53,10 @@ export const ComicCard = ({ title, description, link, issue, color }) => (
 
   <div className="comic-grid">
     <ComicCard 
-      title="MENTAL MODELS" 
+      title="CONCEPT" 
       issue="01"
       description="Unlock superior decision making! Discover the cognitive tools and first principles used by the world's top thinkers."
-      link="/mental-models"
+      link="/concept"
       color="#ef4444"
     />
     <ComicCard 
@@ -67,15 +67,8 @@ export const ComicCard = ({ title, description, link, issue, color }) => (
       color="#3b82f6"
     />
     <ComicCard 
-      title="EXPERIMENTS" 
-      issue="03"
-      description="Witness the madness! Proof of concepts, learning projects, and half-baked ideas. The laboratory of thought."
-      link="/experiments"
-      color="#10b981"
-    />
-    <ComicCard 
       title="PLAYBOOKS" 
-      issue="04"
+      issue="03"
       description="Execute with precision! Actionable guides and step-by-step protocols for engineering leadership and ops."
       link="/playbooks"
       color="#f59e0b"
