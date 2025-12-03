@@ -55,11 +55,10 @@ const config = {
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
-        // Options for the search plugin
-        hashed: true,
         language: ["en"],
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: '/',
       },
     ],
   ],
