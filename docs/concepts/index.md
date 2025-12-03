@@ -2,11 +2,11 @@
 sidebar_position: 0
 ---
 
-# Mental Models
+# Concepts
 
-Mental models are frameworks for understanding how the world works. They help us think better, make better decisions, and solve problems more effectively.
+A curated toolkit of mental models and practical frameworks. The collection spans from software design to cognitive strategies used by world-class leaders.
 
 ## Overview
 
-This section contains mental models that I've found useful in various contexts - from software engineering to business strategy to personal development.
+This is my personal cheat sheet for clarity in complexity. Each concept is summarized for fast absorption and linked to deeper dives if you crave detail.
 
