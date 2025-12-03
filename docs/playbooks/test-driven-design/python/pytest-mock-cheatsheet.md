@@ -1,7 +1,5 @@
 ---
 title: Pytest Mocking Cheatsheet
-description: A quick reference for mocking with pytest-mock.
-sidebar_label: Pytest Mocking
 ---
 
 # Pytest Mocking Cheatsheet

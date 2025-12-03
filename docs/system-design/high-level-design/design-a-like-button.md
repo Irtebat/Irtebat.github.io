@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+title: Design a like button
 ---
 
 # Design a Like Button

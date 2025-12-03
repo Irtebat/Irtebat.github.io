@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # High Level Design
 
 Deep dives into the high-level design of the various systems, focusing on its purpose, scope, major components, and how those components interact to meet key functional and non-functional requirements. 

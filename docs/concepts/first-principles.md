@@ -1,7 +1,3 @@
----
-sidebar_position: 1`
----
-
 # First Principles Thinking
 
 First principles thinking is a fancy way of saying "think like a physicist." Rather than reasoning by analogy, you boil things down to the most fundamental truths you can imagine and then you reason up from there.

@@ -1,7 +1,5 @@
 ---
 title: pytest Cheatsheet
-description: A quick reference for testing with pytest.
-sidebar_label: pytest
 ---
 
 # pytest Cheatsheet

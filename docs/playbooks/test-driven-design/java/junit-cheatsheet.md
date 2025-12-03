@@ -1,7 +1,5 @@
 ---
 title: JUnit 5 Cheatsheet
-description: A quick reference for testing with JUnit 5.
-sidebar_label: JUnit 5
 ---
 
 # JUnit 5 Cheatsheet

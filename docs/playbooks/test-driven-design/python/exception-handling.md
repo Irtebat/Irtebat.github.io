@@ -1,7 +1,5 @@
 ---
 title: Python Exception Handling Cheatsheet
-description: A quick reference for handling exceptions in Python.
-sidebar_label: Exception Handling
 ---
 
 # Python Exception Handling Cheatsheet

@@ -1,7 +1,5 @@
 ---
 title: Python Logging Cheatsheet
-description: A quick reference for logging in Python.
-sidebar_label: Logging
 ---
 
 # Python Logging Cheatsheet

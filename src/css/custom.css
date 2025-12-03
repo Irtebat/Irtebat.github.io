@@ -155,7 +155,10 @@ p, li {
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--border-color);
   background-color: var(--ifm-background-color);
+  /* Ensure sidebar container doesn't shift based on content */
+  align-self: flex-start;
 }
+
 
 .menu__link {
   border-radius: 6px;

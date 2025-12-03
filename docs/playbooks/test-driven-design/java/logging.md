@@ -1,7 +1,5 @@
 ---
 title: Java Logging Cheatsheet
-description: A quick reference for logging in Java (SLF4J + Logback/Log4j2).
-sidebar_label: Logging
 ---
 
 # Java Logging Cheatsheet
