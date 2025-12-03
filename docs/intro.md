@@ -56,7 +56,7 @@ export const ComicCard = ({ title, description, link, issue, color }) => (
       title="CONCEPT" 
       issue="01"
       description="Unlock superior decision making! Discover the cognitive tools and first principles used by the world's top thinkers."
-      link="/concept"
+      link="/concepts"
       color="#ef4444"
     />
     <ComicCard 
