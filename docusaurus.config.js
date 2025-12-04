@@ -76,6 +76,11 @@ const config = {
             label: 'Home',
           },
           {
+            to: '/about',
+            position: 'left',
+            label: 'About Me',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'concepts',
             position: 'left',

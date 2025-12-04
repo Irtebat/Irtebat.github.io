@@ -460,6 +460,10 @@ p, li {
   position: relative;
 }
 
+.comic-feature-box p {
+  margin: 0 0 0 0;
+}
+
 .comic-feature-box h3 {
   background: var(--ifm-font-color-base);
   color: var(--ifm-background-color); /* Changed from #fff to match LATEST ISSUES */
@@ -545,4 +549,289 @@ thead tr {
 img {
   border-radius: 8px;
   border: 1px solid var(--border-color);
+}
+
+/* ============================================================================
+   PROFILE PAGE
+   ========================================================================= */
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.profile-header {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .comic-resume-btn-small {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.profile-image-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--ifm-font-color-base);
+  box-shadow: 8px 8px 0px var(--border-color);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info p {
+  margin: 0 0 0 0;
+}
+
+.profile-name {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--ifm-color-primary);
+  margin-top: 0;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.comic-resume-btn-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-family: var(--font-comic-body);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ifm-font-color-base);
+  padding: 0.75rem 2rem;
+  background: var(--ifm-background-surface-color);
+  border: 3px solid var(--ifm-font-color-base);
+  box-shadow: 6px 6px 0px var(--ifm-font-color-base);
+  text-decoration: none !important;
+  transform: rotate(-2deg);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.1em;
+  border-bottom: 3px solid var(--ifm-font-color-base) !important;
+  margin-top: 0.5rem;
+}
+
+.comic-resume-btn-small:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 8px 8px 0px var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
+  border-bottom: 3px solid var(--ifm-color-primary) !important;
+}
+
+.profile-socials {
+  margin-top: 1.5rem;
+  font-family: var(--font-comic-body);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.profile-socials a {
+  color: var(--ifm-font-color-base);
+  border-bottom: 1px solid var(--ifm-font-color-base);
+}
+
+.profile-socials a:hover {
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.section-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--ifm-font-color-base);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  display: inline-block;
+  background: var(--ifm-background-surface-color);
+  padding-right: 1rem;
+  padding-left: 1rem;
+  transform: skew(-5deg);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.experience-item {
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--border-color);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.experience-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--ifm-font-color-base);
+  border-radius: 50%;
+}
+
+/* Grouped Experience for multiple roles */
+.experience-group {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 3rem;
+  padding-bottom: 0.5rem;
+}
+
+/* The Timeline Line - starts below title */
+.experience-group::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2.2rem; /* Starts below the company title */
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.experience-group::before {
+  display: none;
+}
+
+.experience-company-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.4rem;
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+  margin-left: -1.5rem; /* Align flush left with the border */
+}
+
+.experience-sub-item {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.experience-sub-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Indicator for sub-roles */
+.experience-sub-item::before {
+  content: '';
+  position: absolute;
+  left: -1.6rem; /* Align with the main line */
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  background: var(--ifm-color-primary); /* Using primary color for sub-dots */
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--ifm-background-color); /* White ring to separate from line */
+  z-index: 1;
+}
+
+.experience-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.experience-role-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+}
+
+.experience-sub-date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-tertiary);
+}
+
+.experience-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ifm-font-color-secondary);
+  margin: 0;
+}
+
+.experience-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.experience-role {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ifm-font-color-base);
+}
+
+.experience-company {
+  font-family: var(--font-comic-body);
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.experience-date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-tertiary);
+  margin-bottom: 1rem;
+}
+
+.experience-details {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.experience-details li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
