@@ -86,7 +86,7 @@ import SuperheroBackground from '@site/src/components/SuperheroBackground';
         <div className="experience-sub-item">
           <div className="experience-role-header">
             <span className="experience-role-name">Engineer</span>
-            <span className="experience-sub-date">2021 - 2022 • Remote</span>
+            <span className="experience-sub-date">2021 - 2022 • Blr, India</span>
           </div>
             <p className="experience-description">
             In this role, I was responsible for development of automation tools to provide operational recommendations and generate insights for Enterprise customers.
