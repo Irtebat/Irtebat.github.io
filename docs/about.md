@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: About Me
+description: Senior Engineer specializing in distributed systems, platform engineering, and data streaming. Learn about my experience and background.
 hide_table_of_contents: true
 ---
 
