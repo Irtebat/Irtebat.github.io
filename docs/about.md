@@ -45,7 +45,7 @@ import SuperheroBackground from '@site/src/components/SuperheroBackground';
       <h3>BIO</h3>
       <div style={{ fontSize: '1.05rem', lineHeight: '1.7', color: 'var(--ifm-font-color-secondary)' }}>
         Senior Engineer specializing in distributed systems, platform engineering, and data streaming.
-        <br/><br/>
+        <br/>
         My work sits at the intersection of software engineering, platform architecture, and DevOps automation. 
         Over the years, I have designed and implemented high-throughput streaming platforms, microservice architectures, and cloud-native pipelines for organizations across domains such as Retail, Banking, and E-commerce — always with an emphasis on reliability, observability, and developer velocity.
       </div>
