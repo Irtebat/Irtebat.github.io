@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/Central Analytics/SSO Setup Pre-requisites" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">SSO Setup Pre-requisites | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/Central Analytics/SSO Setup Pre-requisites"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SSO Setup Pre-requisites | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="23/1/26"><meta data-rh="true" property="og:description" content="23/1/26"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/Central Analytics/SSO Setup Pre-requisites"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Central Analytics/SSO Setup Pre-requisites" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Central Analytics/SSO Setup Pre-requisites" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>SSO Setup Pre-requisites</h1></header><p><em>23/1/26</em></p>
+<p>Enable SSO for Confluent Control Center deployed via CFK using Azure Entra ID as an OpenID Connect (OIDC) Identity Provider.</p>
+<p><strong>Architecture Overview</strong></p>
+<ul>
+<li class="">IDP: Azure Entra ID</li>
+<li class="">SP: Confluent Control Center (via MDS )</li>
+<li class="">Protocol: OIDC, Authorization Code flow</li>
+<li class="">Authorization Model: Confluent RBAC</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="azure-entra-id-requirements-ad-team">Azure Entra ID Requirements (AD Team)<a href="#azure-entra-id-requirements-ad-team" class="hash-link" aria-label="Direct link to Azure Entra ID Requirements (AD Team)" title="Direct link to Azure Entra ID Requirements (AD Team)" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-app-registration">1. App Registration<a href="#1-app-registration" class="hash-link" aria-label="Direct link to 1. App Registration" title="Direct link to 1. App Registration" translate="no">​</a></h3>
+<ul>
+<li class="">Create a <strong>Web application</strong> in Azure Entra ID</li>
+<li class="">Single-tenant (recommended, unless otherwise required)</li>
+<li class="">Assign intended <strong>users and/or groups</strong> to the application</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-redirect-uri-post-cp-deployment">2. Redirect URI (Post-CP-Deployment)<a href="#2-redirect-uri-post-cp-deployment" class="hash-link" aria-label="Direct link to 2. Redirect URI (Post-CP-Deployment)" title="Direct link to 2. Redirect URI (Post-CP-Deployment)" translate="no">​</a></h3>
+<p>To be added once Control Center is reachable.
+<strong>Format:</strong>
+<code>https://&lt;c3-hostname&gt;:9021/api/metadata/security/1.0/oidc/authorization-code/callback</code></p>
+<ul>
+<li class="">HTTPS required</li>
+<li class="">Exact match enforced by Azure</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-client-credentials">3. Client Credentials<a href="#3-client-credentials" class="hash-link" aria-label="Direct link to 3. Client Credentials" title="Direct link to 3. Client Credentials" translate="no">​</a></h3>
+<p>Provide:</p>
+<ul>
+<li class=""><strong>Client ID</strong></li>
+<li class=""><strong>Client Secret</strong> (confidential)<!-- -->
+<ul>
+<li class="">Validity: Prefer long-lived (12–24 months)</li>
+<li class="">Rotation ownership to be agreed</li>
+</ul>
+</li>
+</ul>
+<p>These are consumed by Control Center and stored securely in Kubernetes secrets.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-token-configuration">4. Token Configuration<a href="#4-token-configuration" class="hash-link" aria-label="Direct link to 4. Token Configuration" title="Direct link to 4. Token Configuration" translate="no">​</a></h3>
+<p>Enable <strong>group claims</strong> in the <strong>ID token</strong>.
+Requirements:</p>
+<ul>
+<li class="">Group claims must be present</li>
+<li class="">Group identifier format must remain consistent</li>
+<li class="">No custom claims required beyond standard OIDC claims</li>
+</ul>
+<p>Purpose:</p>
+<ul>
+<li class="">Group and user claims are mapped to Confluent RBAC principals</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-oidc-metadata">5. OIDC Metadata<a href="#5-oidc-metadata" class="hash-link" aria-label="Direct link to 5. OIDC Metadata" title="Direct link to 5. OIDC Metadata" translate="no">​</a></h3>
+<p>Control Center requires:</p>
+<ul>
+<li class="">Issuer URL</li>
+<li class="">Authorization endpoint</li>
+<li class="">Token endpoint</li>
+<li class="">JWKS URI</li>
+</ul>
+<p>These endpoints must remain stable.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-certificate-trust">6. Certificate Trust<a href="#6-certificate-trust" class="hash-link" aria-label="Direct link to 6. Certificate Trust" title="Direct link to 6. Certificate Trust" translate="no">​</a></h3>
+<p>Azure signing certificates must be trusted by Confluent Metadata Service.
+Required Certificates:</p>
+<ul>
+<li class="">Provided in PEM format</li>
+<li class="">Used to validate ID token signatures</li>
+<li class="">Must be updated if Microsoft rotates trust roots</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="operational-considerations">Operational Considerations<a href="#operational-considerations" class="hash-link" aria-label="Direct link to Operational Considerations" title="Direct link to Operational Considerations" translate="no">​</a></h2>
+<ul>
+<li class="">Client secret rotation</li>
+<li class="">Token lifetime changes</li>
+<li class="">Azure certificate rotation</li>
+<li class="">Group claim behavior changes</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="validation">Validation<a href="#validation" class="hash-link" aria-label="Direct link to Validation" title="Direct link to Validation" translate="no">​</a></h2>
+<p>Once configured:</p>
+<ul>
+<li class="">User is redirected to Microsoft login</li>
+<li class="">Successful authentication returns user to Control Center</li>
+<li class="">RBAC roles determine access and visibility</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#azure-entra-id-requirements-ad-team" class="table-of-contents__link toc-highlight">Azure Entra ID Requirements (AD Team)</a><ul><li><a href="#1-app-registration" class="table-of-contents__link toc-highlight">1. App Registration</a></li><li><a href="#2-redirect-uri-post-cp-deployment" class="table-of-contents__link toc-highlight">2. Redirect URI (Post-CP-Deployment)</a></li><li><a href="#3-client-credentials" class="table-of-contents__link toc-highlight">3. Client Credentials</a></li><li><a href="#4-token-configuration" class="table-of-contents__link toc-highlight">4. Token Configuration</a></li><li><a href="#5-oidc-metadata" class="table-of-contents__link toc-highlight">5. OIDC Metadata</a></li><li><a href="#6-certificate-trust" class="table-of-contents__link toc-highlight">6. Certificate Trust</a></li></ul></li><li><a href="#operational-considerations" class="table-of-contents__link toc-highlight">Operational Considerations</a></li><li><a href="#validation" class="table-of-contents__link toc-highlight">Validation</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

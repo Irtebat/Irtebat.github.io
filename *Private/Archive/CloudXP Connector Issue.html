@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/Archive/CloudXP Connector Issue" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">CloudXP Connector Issue | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/Archive/CloudXP Connector Issue"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="CloudXP Connector Issue | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="I noted logs “[2025-07-03 0422,731] WARN [pmdmofficemastersinkconnector|task-0] [Consumer clientId=connector-consumer-pmdmofficemastersinkconnector-0, groupId=connect-pmdmofficemastersinkconnector] consumer poll timeout has expired.”"><meta data-rh="true" property="og:description" content="I noted logs “[2025-07-03 0422,731] WARN [pmdmofficemastersinkconnector|task-0] [Consumer clientId=connector-consumer-pmdmofficemastersinkconnector-0, groupId=connect-pmdmofficemastersinkconnector] consumer poll timeout has expired.”"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/Archive/CloudXP Connector Issue"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Archive/CloudXP Connector Issue" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Archive/CloudXP Connector Issue" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="theme-doc-markdown markdown"><header><h1>CloudXP Connector Issue</h1></header><p>I noted logs “[2025-07-03 04:32:22,731] WARN [pmdm_office_master_sink_connector|task-0] [Consumer clientId=connector-consumer-pmdm_office_master_sink_connector-0, groupId=connect-pmdm_office_master_sink_connector] consumer poll timeout has expired.”</p>
+<p>Implications</p>
+<ul>
+<li class="">
+<p>Kafka Connect JDBC Sink operates inside a <strong>single-threaded task</strong> per connector task.</p>
+<ul>
+<li class="">
+<p>It fetches a batch of records from Kafka, then calls the JDBC <code>executeBatch()</code> method.</p>
+</li>
+<li class="">
+<p>When the connector calls <code>executeBatch()</code>:</p>
+<ul>
+<li class="">
+<p>JDBC driver sends all batched SQL statements to the database.</p>
+</li>
+<li class="">
+<p>Then the driver <strong>waits for the database to process all those statements</strong>.</p>
+</li>
+<li class="">
+<p>Only after all results are received (either success or exception), does <code>executeBatch()</code> return.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p>Until <code>executeBatch()</code> returns, that task:</p>
+<ul>
+<li class="">
+<p>Cannot process any new Kafka records.</p>
+</li>
+<li class="">
+<p>Cannot send new poll requests to Kafka (this is tied to the log above ).</p>
+<ul>
+<li class="">
+<p>JDBC insert operation took longer than <code>max.poll.interval.ms</code>.</p>
+</li>
+<li class="">
+<p>Kafka Connect could not call <code>poll()</code> in time, triggering <strong>consumer timeout</strong>.</p>
+</li>
+<li class="">
+<p>Kafka removed the consumer from the group, forcing a <strong>rebalance</strong>.</p>
+</li>
+<li class="">
+<p>PostgreSQL accumulates stuck backends.</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p>Cannot commit offsets or heartbeat.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="">
+<p>Your <strong>JDBC Sink Connector task</strong> got blocked inside the <code>put()</code> method. My thoughts on why:</p>
+<ul>
+<li class="">
+<p>It was trying to process a large batch</p>
+</li>
+<li class="">
+<p>Kafka Connect JDBC Sink uses JDBC batch mode. As such, the JDBC driver sends <strong>multiple individual statements</strong> over the TCP connection.</p>
+</li>
+<li class="">
+<p>PostgreSQL <strong>executes</strong> each one quickly and starts returning a result for each statement.</p>
+<ul>
+<li class="">This causes large numbers of TCP packets, responses, and possible stalls for large batches.</li>
+</ul>
+</li>
+<li class="">
+<p>If PostgreSQL’s <strong>TCP socket buffer</strong> fills up (due to too many responses or TCP congestion), PostgreSQL pauses sending more responses and waits for the client (JDBC driver) to start reading them.</p>
+</li>
+<li class="">
+<p>Kafka Connect JDBC Sink’s <code>executeBatch()</code> <strong>internally waits for all responses before returning</strong>.</p>
+<ul>
+<li class=""><code>executeBatch()</code> waits for all responses from the database before it returns.</li>
+</ul>
+</li>
+<li class="">
+<p>If TCP buffers are full or Connect is blocked internally, this leads to a deadlock-like situation:</p>
+<ul>
+<li class="">
+<p>PostgreSQL waits for the client (stuck in <code>ClientRead</code>).</p>
+</li>
+<li class="">
+<p>Kafka Connect waits for PostgreSQL to complete <code>executeBatch()</code>.</p>
+</li>
+<li class="">
+<p>Both sides are blocked on TCP socket behavior, not query execution latency.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Optimizations to alleviate the issue</strong></p>
+<p><code>reWriteBatchedInserts=true</code></p>
+<p>Reduce <code>batch.size</code> to a safer value (start with 100 or lower).</p>
+<p>&quot;<a href="http://consumer.override.max.poll.interval.ms/" target="_blank" rel="noopener noreferrer" class="">consumer.override.max.poll.interval.ms</a>&quot;: &quot;600000&quot;</p>
+<p>Based on the logs, the root cause appears to be blocking at the TCP socket layer during JDBC batch writes, caused by inefficient batching behavior and large batch sizes overwhelming TCP buffers between Kafka Connect and PostgreSQL.</p>
+<p>My notes:</p>
+<p>I noted logs:</p>
+<p><code>[2025-07-03 04:32:22,731] WARN [pmdm_office_master_sink_connector|task-0] [Consumer clientId=connector-consumer-pmdm_office_master_sink_connector-0, groupId=connect-pmdm_office_master_sink_connector] consumer poll timeout has expired.</code></p>
+<p><strong>Implications of the log:</strong></p>
+<p>Kafka Connect JDBC Sink operates inside a <strong>single-threaded task</strong> per connector task. It fetches a batch of records from Kafka, then calls the JDBC <code>executeBatch()</code> method.</p>
+<p>During <code>executeBatch()</code>:</p>
+<ul>
+<li class="">
+<p>The JDBC driver sends the batched SQL statements to PostgreSQL.</p>
+</li>
+<li class="">
+<p>The driver then waits for the database to process all those statements.</p>
+</li>
+<li class="">
+<p>Only after all responses (either success or exception) are fully received does <code>executeBatch()</code> return.</p>
+</li>
+</ul>
+<p>While the task is inside <code>executeBatch()</code>:</p>
+<ul>
+<li class="">
+<p>It cannot process any new Kafka records.</p>
+</li>
+<li class="">
+<p>It cannot send new poll requests to Kafka (this caused the log above).</p>
+</li>
+<li class="">
+<p>It cannot commit offsets or send heartbeats to the Kafka group coordinator.</p>
+</li>
+</ul>
+<p>If JDBC insert operation takes longer than <code>max.poll.interval.ms</code>. Therefore</p>
+<ul>
+<li class="">
+<p>Kafka Connect could not call <code>poll()</code> in time, triggering a consumer timeout.</p>
+</li>
+<li class="">
+<p>Kafka removed the consumer from the group, forcing a rebalance.</p>
+<ul>
+<li class="">There are a set of rebalance logs</li>
+</ul>
+</li>
+<li class="">
+<p>PostgreSQL accumulates stuck backends waiting for the client to read results.</p>
+</li>
+</ul>
+<p><strong>Possible reasons why the JDBC Sink Connector Task Gets Blocked Inside</strong> <code>**put()**</code><strong>:</strong></p>
+<ul>
+<li class="">
+<p>The connector was processing a large batch.</p>
+</li>
+<li class="">
+<p>Kafka Connect JDBC Sink uses JDBC batch mode.</p>
+<ul>
+<li class="">By default, the PostgreSQL JDBC driver sends <strong>multiple individual INSERT statements</strong> over the TCP connection per batch.</li>
+</ul>
+</li>
+<li class="">
+<p>PostgreSQL executes each statement quickly and starts returning a result for each. This creates a large number of TCP packets and responses, especially for large batches.</p>
+</li>
+<li class="">
+<p>If PostgreSQL’s TCP socket buffer fills up, PostgreSQL pauses sending further responses and waits for the client (JDBC driver) to read the buffered results.</p>
+</li>
+<li class="">
+<p>Kafka Connect JDBC Sink’s <code>executeBatch()</code> <strong>internally waits for all responses</strong> before it returns.</p>
+</li>
+</ul>
+<p><strong>This results in a deadlock-like Situation:</strong></p>
+<ul>
+<li class="">
+<p>PostgreSQL waits for the client to read results (<strong>stuck in</strong> <code>**ClientRead**</code>).</p>
+</li>
+<li class="">
+<p>Kafka Connect task is blocked inside <code>executeBatch()</code>, waiting for PostgreSQL to finish.</p>
+</li>
+<li class="">
+<p>Both sides are effectively blocked due to TCP socket behavior and backpressure, even though PostgreSQL query latency itself may be acceptable.</p>
+</li>
+</ul>
+<p><strong>Optimizations to Alleviate This Issue:</strong></p>
+<ol>
+<li class="">
+<p>Enable PostgreSQL JDBC batch rewriting by appending this query parameter in your connection string: reWriteBatchedInserts=true</p>
+<ol>
+<li class="">This rewrites batches into a single multi-row <code>INSERT</code>, reducing the number of responses and eliminating the stall.</li>
+</ol>
+</li>
+<li class="">
+<p>Reduce <code>batch.size</code> to a safer value (start with <strong>100</strong> or benchmark ).</p>
+</li>
+<li class="">
+<p>Optionally, increase: &quot;consumer.override.max.poll.interval.ms&quot;: &quot;600000&quot;</p>
+<ol>
+<li class="">I see this as a temporary safeguard—this does not solve the root cause but avoids premature consumer timeouts during long processing.</li>
+</ol>
+</li>
+</ol></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

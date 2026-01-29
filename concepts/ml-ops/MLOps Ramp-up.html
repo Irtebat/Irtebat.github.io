@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-concepts/ml-ops/MLOps Ramp-up" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">MLOps Ramp-up | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/concepts/ml-ops/MLOps Ramp-up"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="MLOps Ramp-up | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="Day 1 — What MLOps Is and Why ML Fails in Production"><meta data-rh="true" property="og:description" content="Day 1 — What MLOps Is and Why ML Fails in Production"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/concepts/ml-ops/MLOps Ramp-up"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/concepts/ml-ops/MLOps Ramp-up" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/concepts/ml-ops/MLOps Ramp-up" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ML Ops","item":"https://irtebat.github.io/concepts/ml-ops/"},{"@type":"ListItem","position":2,"name":"MLOps Ramp-up","item":"https://irtebat.github.io/concepts/ml-ops/MLOps Ramp-up"}]}</script><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/concepts"><span title="Concepts" class="linkLabel_WmDU">Concepts</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/concepts/first-principles"><span title="First Principles Thinking" class="linkLabel_WmDU">First Principles Thinking</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/concepts/ml-ops"><span title="ML Ops" class="categoryLinkLabel_W154">ML Ops</span></a><button aria-label="Collapse sidebar category &#x27;ML Ops&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/concepts/ml-ops/MLOps Ramp-up"><span title="MLOps Ramp-up" class="linkLabel_WmDU">MLOps Ramp-up</span></a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/concepts/ml-ops"><span>ML Ops</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">MLOps Ramp-up</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>MLOps Ramp-up</h1></header><h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="day-1--what-mlops-is-and-why-ml-fails-in-production">Day 1 — What MLOps Is and Why ML Fails in Production<a href="#day-1--what-mlops-is-and-why-ml-fails-in-production" class="hash-link" aria-label="Direct link to Day 1 — What MLOps Is and Why ML Fails in Production" title="Direct link to Day 1 — What MLOps Is and Why ML Fails in Production" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="primary-must-read">Primary (Must Read)<a href="#primary-must-read" class="hash-link" aria-label="Direct link to Primary (Must Read)" title="Direct link to Primary (Must Read)" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>Hidden Technical Debt in Machine Learning Systems</strong><br>
+<!-- -->Google Research<br>
+<a href="https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf" target="_blank" rel="noopener noreferrer" class="">https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf</a><br>
+<!-- -->Focus sections:</p>
+<ul>
+<li class="">
+<p>ML system diagram</p>
+</li>
+<li class="">
+<p>Data dependencies</p>
+</li>
+<li class="">
+<p>Configuration debt</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>Rules of Machine Learning: Best Practices for ML Engineering</strong><br>
+<!-- -->Google<br>
+<a href="https://developers.google.com/machine-learning/guides/rules-of-ml" target="_blank" rel="noopener noreferrer" class="">https://developers.google.com/machine-learning/guides/rules-of-ml</a><br>
+<!-- -->Read Rules 1–30 only.</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="short-video-optional">Short Video (Optional)<a href="#short-video-optional" class="hash-link" aria-label="Direct link to Short Video (Optional)" title="Direct link to Short Video (Optional)" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>MLOps Explained</strong> – Google Cloud Tech<br>
+<a href="https://www.youtube.com/watch?v=06-AZXmwHjo" target="_blank" rel="noopener noreferrer" class="">https://www.youtube.com/watch?v=06-AZXmwHjo</a></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="outcome">Outcome<a href="#outcome" class="hash-link" aria-label="Direct link to Outcome" title="Direct link to Outcome" translate="no">​</a></h3>
+<p>You should clearly articulate:</p>
+<ul>
+<li class="">
+<p>Why DevOps mental models fail for ML</p>
+</li>
+<li class="">
+<p>Why data is the dominant risk factor</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="day-2--data-features-and-reproducibility">Day 2 — Data, Features, and Reproducibility<a href="#day-2--data-features-and-reproducibility" class="hash-link" aria-label="Direct link to Day 2 — Data, Features, and Reproducibility" title="Direct link to Day 2 — Data, Features, and Reproducibility" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="primary-reads">Primary Reads<a href="#primary-reads" class="hash-link" aria-label="Direct link to Primary Reads" title="Direct link to Primary Reads" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>The Hard Parts of Machine Learning</strong><br>
+<!-- -->Google Engineering Blog<br>
+<a href="https://ai.googleblog.com/2018/03/the-hard-parts-of-machine-learning.html" target="_blank" rel="noopener noreferrer" class="">https://ai.googleblog.com/2018/03/the-hard-parts-of-machine-learning.html</a></p>
+</li>
+<li class="">
+<p><strong>Feature Stores: The Missing Piece in MLOps</strong><br>
+<!-- -->Feast Blog (conceptual)<br>
+<a href="https://feast.dev/blog/what-is-a-feature-store/" target="_blank" rel="noopener noreferrer" class="">https://feast.dev/blog/what-is-a-feature-store/</a></p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="deep-concept-read-skim">Deep Concept Read (Skim)<a href="#deep-concept-read-skim" class="hash-link" aria-label="Direct link to Deep Concept Read (Skim)" title="Direct link to Deep Concept Read (Skim)" translate="no">​</a></h3>
+<ol start="3">
+<li class=""><strong>Data Validation for Machine Learning</strong><br>
+<!-- -->TensorFlow Data Validation<br>
+<a href="https://www.tensorflow.org/tfx/data_validation" target="_blank" rel="noopener noreferrer" class="">https://www.tensorflow.org/tfx/data_validation</a></li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="key-concepts-to-extract">Key Concepts to Extract<a href="#key-concepts-to-extract" class="hash-link" aria-label="Direct link to Key Concepts to Extract" title="Direct link to Key Concepts to Extract" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>Point-in-time correctness</p>
+</li>
+<li class="">
+<p>Feature leakage</p>
+</li>
+<li class="">
+<p>Dataset versioning vs code versioning</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="day-3--training-pipelines-cicd-deployment-patterns">Day 3 — Training Pipelines, CI/CD, Deployment Patterns<a href="#day-3--training-pipelines-cicd-deployment-patterns" class="hash-link" aria-label="Direct link to Day 3 — Training Pipelines, CI/CD, Deployment Patterns" title="Direct link to Day 3 — Training Pipelines, CI/CD, Deployment Patterns" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="primary-reads-1">Primary Reads<a href="#primary-reads-1" class="hash-link" aria-label="Direct link to Primary Reads" title="Direct link to Primary Reads" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>Continuous Delivery for Machine Learning</strong><br>
+<!-- -->Google Cloud Architecture<br>
+<a href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning" target="_blank" rel="noopener noreferrer" class="">https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning</a></p>
+</li>
+<li class="">
+<p><strong>Machine Learning Deployment Patterns</strong><br>
+<!-- -->Martin Fowler<br>
+<a href="https://martinfowler.com/articles/cd4ml.html" target="_blank" rel="noopener noreferrer" class="">https://martinfowler.com/articles/cd4ml.html</a></p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="short-video">Short Video<a href="#short-video" class="hash-link" aria-label="Direct link to Short Video" title="Direct link to Short Video" translate="no">​</a></h3>
+<ul>
+<li class=""><strong>CI/CD for Machine Learning</strong> – Chip Huyen<br>
+<a href="https://www.youtube.com/watch?v=KJtZARuO3JY" target="_blank" rel="noopener noreferrer" class="">https://www.youtube.com/watch?v=KJtZARuO3JY</a></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="concepts-to-internalize">Concepts to Internalize<a href="#concepts-to-internalize" class="hash-link" aria-label="Direct link to Concepts to Internalize" title="Direct link to Concepts to Internalize" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>Why models need registries</p>
+</li>
+<li class="">
+<p>Why canary deployments matter more for ML</p>
+</li>
+<li class="">
+<p>Why training pipelines are not build pipelines</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="day-4--monitoring-drift-and-governance">Day 4 — Monitoring, Drift, and Governance<a href="#day-4--monitoring-drift-and-governance" class="hash-link" aria-label="Direct link to Day 4 — Monitoring, Drift, and Governance" title="Direct link to Day 4 — Monitoring, Drift, and Governance" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="primary-reads-2">Primary Reads<a href="#primary-reads-2" class="hash-link" aria-label="Direct link to Primary Reads" title="Direct link to Primary Reads" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>Monitoring Machine Learning Models in Production</strong><br>
+<!-- -->Google<br>
+<a href="https://cloud.google.com/architecture/mlops-monitoring" target="_blank" rel="noopener noreferrer" class="">https://cloud.google.com/architecture/mlops-monitoring</a></p>
+</li>
+<li class="">
+<p><strong>Concept Drift and Data Drift in ML Systems</strong><br>
+<!-- -->Evidently AI Blog<br>
+<a href="https://www.evidentlyai.com/ml-monitoring/data-drift" target="_blank" rel="noopener noreferrer" class="">https://www.evidentlyai.com/ml-monitoring/data-drift</a></p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="governance-and-risk">Governance and Risk<a href="#governance-and-risk" class="hash-link" aria-label="Direct link to Governance and Risk" title="Direct link to Governance and Risk" translate="no">​</a></h3>
+<ol start="3">
+<li class=""><strong>Model Governance for ML Systems</strong><br>
+<!-- -->Microsoft Learn<br>
+<a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/model-governance" target="_blank" rel="noopener noreferrer" class="">https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/model-governance</a></li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="key-mental-models">Key Mental Models<a href="#key-mental-models" class="hash-link" aria-label="Direct link to Key Mental Models" title="Direct link to Key Mental Models" translate="no">​</a></h3>
+<ul>
+<li class="">
+<p>Proxy metrics vs true labels</p>
+</li>
+<li class="">
+<p>Alerting humans vs auto-retraining</p>
+</li>
+<li class="">
+<p>Auditability over accuracy</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="day-5--tooling-landscape-and-reference-architectures">Day 5 — Tooling Landscape and Reference Architectures<a href="#day-5--tooling-landscape-and-reference-architectures" class="hash-link" aria-label="Direct link to Day 5 — Tooling Landscape and Reference Architectures" title="Direct link to Day 5 — Tooling Landscape and Reference Architectures" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tool-landscape-high-level-only">Tool Landscape (High-Level Only)<a href="#tool-landscape-high-level-only" class="hash-link" aria-label="Direct link to Tool Landscape (High-Level Only)" title="Direct link to Tool Landscape (High-Level Only)" translate="no">​</a></h3>
+<ol>
+<li class="">
+<p><strong>MLOps Stack Explained</strong><br>
+<!-- -->Chip Huyen<br>
+<a href="https://huyenchip.com/2020/12/30/mlops-v2.html" target="_blank" rel="noopener noreferrer" class="">https://huyenchip.com/2020/12/30/mlops-v2.html</a></p>
+</li>
+<li class="">
+<p><strong>MLflow Concepts (Not Tutorials)</strong><br>
+<a href="https://mlflow.org/docs/latest/concepts.html" target="_blank" rel="noopener noreferrer" class="">https://mlflow.org/docs/latest/concepts.html</a></p>
+</li>
+<li class="">
+<p><strong>Kubeflow Pipelines Overview</strong><br>
+<a href="https://www.kubeflow.org/docs/components/pipelines/overview/" target="_blank" rel="noopener noreferrer" class="">https://www.kubeflow.org/docs/components/pipelines/overview/</a></p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="architecture-reference">Architecture Reference<a href="#architecture-reference" class="hash-link" aria-label="Direct link to Architecture Reference" title="Direct link to Architecture Reference" translate="no">​</a></h3>
+<ol start="4">
+<li class=""><strong>End-to-End MLOps Architecture</strong><br>
+<!-- -->Google<br>
+<a href="https://cloud.google.com/architecture/reference-architectures/mlops" target="_blank" rel="noopener noreferrer" class="">https://cloud.google.com/architecture/reference-architectures/mlops</a></li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="final-synthesis-resource">Final Synthesis Resource<a href="#final-synthesis-resource" class="hash-link" aria-label="Direct link to Final Synthesis Resource" title="Direct link to Final Synthesis Resource" translate="no">​</a></h3>
+<ol start="5">
+<li class="">
+<p><strong>Designing Machine Learning Systems</strong> (Book – selective reading)<br>
+<!-- -->Chip Huyen<br>
+<!-- -->Chapters to read:</p>
+<ul>
+<li class="">
+<p>Chapter 1: Overview of ML Systems</p>
+</li>
+<li class="">
+<p>Chapter 6: Model Deployment and Prediction Service</p>
+</li>
+<li class="">
+<p>Chapter 9: Continual Learning and Monitoring</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="one-page-cheat-sheet-what-you-should-walk-away-with">One-Page Cheat Sheet (What You Should Walk Away With)<a href="#one-page-cheat-sheet-what-you-should-walk-away-with" class="hash-link" aria-label="Direct link to One-Page Cheat Sheet (What You Should Walk Away With)" title="Direct link to One-Page Cheat Sheet (What You Should Walk Away With)" translate="no">​</a></h2>
+<p>You should be able to confidently explain:</p>
+<ul>
+<li class="">
+<p>What must be versioned: <strong>data, features, models, metrics</strong></p>
+</li>
+<li class="">
+<p>Why monitoring is harder than deployment</p>
+</li>
+<li class="">
+<p>Why automation increases risk early</p>
+</li>
+<li class="">
+<p>Why most ML outages are data-related, not code-</p>
+</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/concepts/ml-ops"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ML Ops</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#day-1--what-mlops-is-and-why-ml-fails-in-production" class="table-of-contents__link toc-highlight">Day 1 — What MLOps Is and Why ML Fails in Production</a><ul><li><a href="#primary-must-read" class="table-of-contents__link toc-highlight">Primary (Must Read)</a></li><li><a href="#short-video-optional" class="table-of-contents__link toc-highlight">Short Video (Optional)</a></li><li><a href="#outcome" class="table-of-contents__link toc-highlight">Outcome</a></li></ul></li><li><a href="#day-2--data-features-and-reproducibility" class="table-of-contents__link toc-highlight">Day 2 — Data, Features, and Reproducibility</a><ul><li><a href="#primary-reads" class="table-of-contents__link toc-highlight">Primary Reads</a></li><li><a href="#deep-concept-read-skim" class="table-of-contents__link toc-highlight">Deep Concept Read (Skim)</a></li><li><a href="#key-concepts-to-extract" class="table-of-contents__link toc-highlight">Key Concepts to Extract</a></li></ul></li><li><a href="#day-3--training-pipelines-cicd-deployment-patterns" class="table-of-contents__link toc-highlight">Day 3 — Training Pipelines, CI/CD, Deployment Patterns</a><ul><li><a href="#primary-reads-1" class="table-of-contents__link toc-highlight">Primary Reads</a></li><li><a href="#short-video" class="table-of-contents__link toc-highlight">Short Video</a></li><li><a href="#concepts-to-internalize" class="table-of-contents__link toc-highlight">Concepts to Internalize</a></li></ul></li><li><a href="#day-4--monitoring-drift-and-governance" class="table-of-contents__link toc-highlight">Day 4 — Monitoring, Drift, and Governance</a><ul><li><a href="#primary-reads-2" class="table-of-contents__link toc-highlight">Primary Reads</a></li><li><a href="#governance-and-risk" class="table-of-contents__link toc-highlight">Governance and Risk</a></li><li><a href="#key-mental-models" class="table-of-contents__link toc-highlight">Key Mental Models</a></li></ul></li><li><a href="#day-5--tooling-landscape-and-reference-architectures" class="table-of-contents__link toc-highlight">Day 5 — Tooling Landscape and Reference Architectures</a><ul><li><a href="#tool-landscape-high-level-only" class="table-of-contents__link toc-highlight">Tool Landscape (High-Level Only)</a></li><li><a href="#architecture-reference" class="table-of-contents__link toc-highlight">Architecture Reference</a></li><li><a href="#final-synthesis-resource" class="table-of-contents__link toc-highlight">Final Synthesis Resource</a></li></ul></li><li><a href="#one-page-cheat-sheet-what-you-should-walk-away-with" class="table-of-contents__link toc-highlight">One-Page Cheat Sheet (What You Should Walk Away With)</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

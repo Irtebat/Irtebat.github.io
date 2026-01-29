@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/Money Control/Recommendations for client upgrade" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Recommendations for client upgrade | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/Money Control/Recommendations for client upgrade"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Recommendations for client upgrade | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="Kafka client version 0.10.2.0, which is very old (released in 2016). Since then, Apache Kafka has gone through numerous major improvements, especially in client performance, resilience, protocol support, and API ergonomics."><meta data-rh="true" property="og:description" content="Kafka client version 0.10.2.0, which is very old (released in 2016). Since then, Apache Kafka has gone through numerous major improvements, especially in client performance, resilience, protocol support, and API ergonomics."><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/Money Control/Recommendations for client upgrade"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Money Control/Recommendations for client upgrade" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/Money Control/Recommendations for client upgrade" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Recommendations for client upgrade</h1></header><p><strong>Kafka client version</strong> <code>**0.10.2.0**</code>, which is <strong>very old</strong> (released in <strong>2016</strong>). Since then, Apache Kafka has gone through numerous major improvements, especially in client performance, resilience, protocol support, and API ergonomics.</p>
+<p>Your current Kafka client version is <code>**0.10.2.0**</code>, which is <strong>very old</strong> (it was released in <strong>2016</strong>). Since then, Apache Kafka has undergone major enhancements in:</p>
+<ul>
+<li class=""><strong>Performance</strong></li>
+<li class=""><strong>Resilience</strong></li>
+<li class=""><strong>Protocol support (e.g., idempotent producer, cooperative rebalancing)</strong></li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="recommended-upgrade-version">Recommended Upgrade Version<a href="#recommended-upgrade-version" class="hash-link" aria-label="Direct link to Recommended Upgrade Version" title="Direct link to Recommended Upgrade Version" translate="no">​</a></h3>
+<p>Upgrade to the latest <strong>Confluent Kafka Client</strong> version:</p>
+<dependency><p><groupid>org.apache.kafka</groupid><br>
+<artifactid>kafka-clients</artifactid><br>
+<version>7.9.2-ce</version></p></dependency>
+<p>Gradle:</p>
+<p>// <a href="https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients" target="_blank" rel="noopener noreferrer" class="">https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients</a><br>
+<!-- -->implementation group: &#x27;org.apache.kafka&#x27;, name: &#x27;kafka-clients&#x27;, version: &#x27;7.9.2-ce&#x27;</p>
+<p>Source repo: <a href="https://mvnrepository.com/repos/confluent-packages" target="_blank" rel="noopener noreferrer" class="">https://mvnrepository.com/repos/confluent-packages</a></p>
+<p>Note:</p>
+<ul>
+<li class=""><code>kafka-clients:7.9.2-ce</code> (Confluent) = Apache Kafka Client <code>3.7.0</code></li>
+<li class="">Compatible Spring projects:<!-- -->
+<ul>
+<li class=""><strong>Spring for Kafka</strong>: <code>3.3.x</code></li>
+<li class=""><strong>Spring Kafka Integration</strong>: <code>6.4.x</code> or later</li>
+</ul>
+</li>
+<li class="">Kafka provides bidrectly <strong>wire compatibility</strong> between brokers and clients <strong>since version</strong> <code>**0.10.0**</code>.<!-- -->
+<ul>
+<li class="">This means you can <strong>upgrade clients independently</strong> of the broker version, and it is a painless change request</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="about-api-changes">About API changes:<a href="#about-api-changes" class="hash-link" aria-label="Direct link to About API changes:" title="Direct link to About API changes:" translate="no">​</a></h3>
+<ul>
+<li class="">Kafka clients <strong>no longer depend on Zookeeper</strong> — they directly communicate with Kafka brokers for metadata and coordination.</li>
+<li class="">Deprecated methods (e.g., <code>poll(long)</code>) are still supported but you should plan to replace with modern alternatives like <code>poll(Duration)</code> over the long term.</li>
+</ul>
+<p>Suggestions to review and update your code for performance and better stability:</p>
+<p>Consumer Client</p>
+<ul>
+<li class="">
+<p>Review and configure:</p>
+<ul>
+<li class=""><code>max.poll.interval.ms</code></li>
+<li class=""><code>max.poll.records</code></li>
+<li class=""><code>heartbeat.interval.ms</code></li>
+<li class=""><code>session.timeout.ms</code></li>
+</ul>
+</li>
+<li class="">
+<p>If the consumer does not call <code>poll()</code> within <code>max.poll.interval.ms</code>, it will be considered dead, even if heartbeats are sent.</p>
+<ul>
+<li class=""><code>poll()</code> always returns a <strong>non-null</strong>, possibly empty <code>ConsumerRecords</code> object.</li>
+</ul>
+</li>
+<li class="">
+<p>Consider using <strong>cooperative rebalancing</strong> (available since Kafka 2.4) to avoid full rebalance and improves stability during rolling deployments.</p>
+<ul>
+<li class="">Set partition.assignment.strategy = org.apache.kafka.clients.consumer.CooperativeStickyAssignor</li>
+</ul>
+</li>
+</ul>
+<p>Producer Client</p>
+<ul>
+<li class="">
+<p>Review and configure:</p>
+<ul>
+<li class=""><code>acks</code></li>
+<li class=""><code>linger.ms</code></li>
+<li class=""><code>batch.size</code></li>
+</ul>
+</li>
+<li class="">
+<p>Set <code>enable.idempotence = true</code></p>
+<ul>
+<li class="">This ensures that exactly one copy of each message is written in the stream in case of a producer retry</li>
+<li class="">Automatically sets <code>retries = Integer.MAX_VALUE</code> and restricts <code>max.in.flight.requests.per.connection &lt;= 5</code>.</li>
+</ul>
+</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#recommended-upgrade-version" class="table-of-contents__link toc-highlight">Recommended Upgrade Version</a></li><li><a href="#about-api-changes" class="table-of-contents__link toc-highlight">About API changes:</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

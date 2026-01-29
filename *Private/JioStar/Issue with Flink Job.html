@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/JioStar/Issue with Flink Job" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Issue with Flink Job | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/JioStar/Issue with Flink Job"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Issue with Flink Job | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="Date: 20/1/26"><meta data-rh="true" property="og:description" content="Date: 20/1/26"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/JioStar/Issue with Flink Job"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/JioStar/Issue with Flink Job" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/JioStar/Issue with Flink Job" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Issue with Flink Job</h1></header><p><em>Date: 20/1/26</em></p>
+<p><strong>Observed</strong><br>
+<!-- -->Flink Job ( Kafka Sink )</p>
+<ul>
+<li class="">flink version 1.13.1</li>
+<li class="">flink-connector-kafka 2.11
+Sink parallelism is 60; topic partition count is 100.
+Job becomes unresponsive after publishing ~4 mil messages<br>
+<!-- -->Effective batching is low ( ~3 ).<br>
+<!-- -->Total ingress is not close to cluster limit.<br>
+<!-- -->No evidence of produce throttling or hot partitions.<br>
+<!-- -->High request-latency-avg<br>
+<!-- -->High record-queue-time-avg<br>
+<!-- -->Low / zero bufferpool-wait-time-total<br>
+<!-- -->TaskManagers are not being killed; the job restarts (failure detected by Flink runtime rather than platform OOM/eviction).</li>
+</ul>
+<p><strong>What we have ruled out so far</strong></p>
+<ol>
+<li class="">Ingress quota / throughput limit on the cluster as the primary cause (total ingress below 1200 MB/s).</li>
+<li class="">Broker-side produce throttling.</li>
+<li class="">Hot partitions / partition skew.</li>
+<li class="">Producers are not blocked on buffer memory allocation</li>
+<li class="">TaskManager kill / container eviction (job restarts are driven by Flink failure handling).</li>
+</ol>
+<p><strong>Most likely cause</strong><br>
+<!-- -->Request-latency-avg rises, record-queue-time-avg rises, checkpoints slow, causing sustained backpressure and eventual restart via timeouts<br>
+<!-- -->To check:</p>
+<ul>
+<li class="">checkpoint timeouts</li>
+<li class="">embedded Kafka producer’s send/delivery/request timeouts</li>
+<li class="">transaction-related timeouts</li>
+</ul>
+<p><em>Date: 21/1/26</em></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="checklist">Checklist<a href="#checklist" class="hash-link" aria-label="Direct link to Checklist" title="Direct link to Checklist" translate="no">​</a></h4>
+<p><strong>Kafka producer behavior (sink-side)</strong></p>
+<ul>
+<li class="">Enable DEBUG logs for:<!-- -->
+<ul>
+<li class=""><code>org.apache.kafka.clients.producer</code></li>
+<li class=""><code>org.apache.kafka.clients.NetworkClient</code></li>
+</ul>
+</li>
+<li class="">Verify runtime producer configs:<!-- -->
+<ul>
+<li class=""><code>acks</code></li>
+<li class=""><code>linger.ms</code>, <code>batch.size</code></li>
+<li class=""><code>delivery.timeout.ms</code></li>
+<li class=""><code>request.timeout.ms</code></li>
+<li class=""><code>max.in.flight.requests.per.connection</code></li>
+<li class=""><code>retries</code> and <code>retry.backoff.ms</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Checkpointing (Flink-level)</strong></p>
+<ul>
+<li class="">
+<p>Flink UI → <strong>Checkpoints</strong>:</p>
+<ul>
+<li class="">Look for <strong>increasing duration</strong> and <strong>timeouts</strong>.</li>
+<li class="">Identify whether failures point to the <strong>Kafka sink operator</strong>.</li>
+</ul>
+</li>
+<li class="">
+<p>Check JobManager logs for:</p>
+<ul>
+<li class=""><code>Checkpoint expired</code>, <code>Declined checkpoint</code></li>
+</ul>
+</li>
+<li class="">
+<p>Confirm configs:</p>
+<ul>
+<li class=""><code>execution.checkpointing.timeout</code></li>
+<li class=""><code>execution.checkpointing.interval</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Transactions / EOS (if exactly-once is enabled)</strong></p>
+<ul>
+<li class="">
+<p>Verify:</p>
+<ul>
+<li class=""><code>transaction.timeout.ms</code> &gt; worst-case checkpoint duration (with buffer).</li>
+<li class="">Broker max transaction timeout is not exceeded.</li>
+</ul>
+</li>
+<li class="">
+<p>Look for fatal producer errors:</p>
+<ul>
+<li class="">Transaction timeout</li>
+<li class="">Producer fenced / aborted transactions</li>
+</ul>
+</li>
+<li class="">
+<p>Correlate:</p>
+<ul>
+<li class="">Rising checkpoint time → transaction duration → job restart.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Topic &amp; cluster semantics (sanity)</strong></p>
+<ul>
+<li class="">Confirm topic settings:<!-- -->
+<ul>
+<li class="">Replication factor</li>
+<li class=""><code>min.insync.replicas</code></li>
+</ul>
+</li>
+<li class="">Ensure no silent changes from in-house Kafka defaults.</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="summary">Summary<a href="#summary" class="hash-link" aria-label="Direct link to Summary" title="Direct link to Summary" translate="no">​</a></h4>
+<p>Packet travelling to CC has to cross more layers : flink TM node NIC, vpc routing layer, peering endpoint, CC ingress routing, the broker network stack. I am not fully aware of the exact network topology b/w flink jobs and the in-house Kafka, but it is reasonable to assume it was much closer in terms of network hops. Also, I believe there was no TLS overhead when flink jobs were talking with the in-house cluster.
+This is not a capacity or throttling problem. This is usually manageable by tuning the client appropriately (batching, in flight reqs, idempotency, etc ). We have not had the opportunity to do this yet, partly because the kafka client version used by the job is fairly ancient.</p>
+<p>There are a few things I would like to test next. I think we are on the right track with the RCA — latency is the primary driver here.
+I would like to verify what the configured timeouts are for Flink checkpoints + whether EOS is enabled for the Kafka sink ( if so, what is the timeout ) + confirm there are no differences in topic configuration on CC compared to our in-house Kafka defaults. If possible, we should enable Kafka client debug logs in the flink job to get more clarity.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

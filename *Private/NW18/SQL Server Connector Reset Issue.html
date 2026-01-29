@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/NW18/SQL Server Connector Reset Issue" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">SQL Server Connector Reset Issue | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/NW18/SQL Server Connector Reset Issue"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="SQL Server Connector Reset Issue | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="Notes : 23/1/26"><meta data-rh="true" property="og:description" content="Notes : 23/1/26"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/NW18/SQL Server Connector Reset Issue"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/NW18/SQL Server Connector Reset Issue" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/NW18/SQL Server Connector Reset Issue" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>SQL Server Connector Reset Issue</h1></header><p><strong>Notes</strong> : 23/1/26</p>
+<p>A SQL Server CDC connector’s offsets point to <strong>specific LSNs in the database’s transaction log / CDC mapping tables</strong>. When you do:</p>
+<ul>
+<li class="">``</li>
+</ul>
+<p>you are effectively <strong>replacing the entire database state</strong> (data + log) with what is inside the backup.</p>
+<p>This is aligned with the general CDC/restore guidance that CDC depends on the log + capture metadata, and restores change what is available.
+It is a common symptom in offset-mismatch scenarios: the task is up, but it cannot advance because the stored position is no longer reachable.</p>
+<p>CDC will effectively capture changes that occur <strong>from the restored database’s current log position forward</strong>. From the connector’s perspective, this is a “new reality”: offsets from the pre-restore world do not apply.</p>
+<p>Summary:</p>
+<p>Restore changes the <strong>database incarnation</strong> and resets the <strong>transaction log context</strong>. CDC depends on LSNs being monotonic and continuous.</p>
+<p>After a restore:</p>
+<ul>
+<li class="">The database has a new log timeline</li>
+<li class="">Pre-restore LSNs are invalid</li>
+<li class="">CDC must start tracking from the new log chain</li>
+<li class=""><strong>Only subsequent writes after restore</strong> should generate CDC events</li>
+</ul>
+<p>This is therefore a <strong>log continuity</strong> problem.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proposed-solution">Proposed Solution<a href="#proposed-solution" class="hash-link" aria-label="Direct link to Proposed Solution" title="Direct link to Proposed Solution" translate="no">​</a></h3>
+<p>I have shared a postman collection with appropriate labels ( mentioned in the steps below )</p>
+<p>Step 1: Pause the CDC connector<br>
+<!-- -->Pause the SQL Server CDC connector (or stop the Connect task) so it does not retry using stale offsets.</p>
+<ul>
+<li class="">List connectors : Use step_1.1-list_connectors</li>
+<li class="">Check status of SQL Server connector : Use step_1.2-connector_status</li>
+<li class="">Pause SQL Server connector : Use step_1.3-pause_connector</li>
+<li class="">Wait for connector to pause. To confirm, use step_1.2-connector_status</li>
+</ul>
+<p>Step 2: Restore the database as done today</p>
+<ul>
+<li class="">Note: If CDC configuration must be preserved, restore with <code>KEEP_CDC</code> (only if supported by the restore strategy). I suggest the team to refer to Microsoft documentation on CDC and restore behavior  <a href="https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/change-data-capture-and-other-sql-server-features?view=sql-server-ver17&amp;utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="">https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/change-data-capture-and-other-sql-server-features?view=sql-server-ver17</a></li>
+<li class="">If <code>KEEP_CDC</code> is not used, CDC may need to be re-enabled and jobs recreated — your Step 3 covers this.</li>
+</ul>
+<p>Step 3: Verify CDC is usable post-restore</p>
+<p>Run the following checks on the restored database:</p>
+<ul>
+<li class=""><strong>Database-level CDC</strong>
+<code>SELECT name, is_cdc_enabled FROM sys.databases WHERE name = &#x27;FINWIZFINAL&#x27;;</code></li>
+<li class=""><strong>Table-level CDC</strong>
+<code>SELECT name, is_tracked_by_cdc FROM sys.tables WHERE name IN (&#x27;&lt;table1&gt;&#x27;, &#x27;&lt;table2&gt;&#x27;);</code></li>
+<li class=""><strong>CDC capture job (if using SQL Agent)</strong>
+<code>EXEC sys.sp_cdc_help_jobs;</code></li>
+</ul>
+<p>If any of these checks fail, CDC must be re-enabled before proceeding.<br>
+<!-- -->The <code>KEEP_CDC</code> flag in Step 2 should help avoid this.</p>
+<p>Step 4: Reset connector offsets
+This forces the connector to restart from the <strong>post-restore CDC minimum LSN</strong>. It starts from the minimum <em>valid</em> LSN after restore</p>
+<ul>
+<li class="">Initiate offset delete : step_4.2-delete_offsets</li>
+<li class="">Confirm offsets are deleted : step_4.3-offsets_delete_status</li>
+</ul>
+<p>Step 5: Resume or restart the connector</p>
+<ul>
+<li class="">Use step_5-resume_connector</li>
+<li class="">Wait for connector to start. To confirm, use step_1.2-connector_status</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="notes">Notes<a href="#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes" translate="no">​</a></h3>
+<ul>
+<li class="">Duplicates around the restore boundary are expected</li>
+<li class="">Per discussion with the team, downstream dedup or upsert logic is already in place (primary key, natural key, or idempotent sink)</li>
+<li class="">If no writes occur between <strong>Step 1 and Step 5</strong>, there is <strong>no data loss</strong></li>
+</ul>
+<p>Attached are postman collection to help with Connect related actions ( Pause Connector, Reset Offset, Confirm Offset reset, Resume Connector + misc  )</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#proposed-solution" class="table-of-contents__link toc-highlight">Proposed Solution</a></li><li><a href="#notes" class="table-of-contents__link toc-highlight">Notes</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>

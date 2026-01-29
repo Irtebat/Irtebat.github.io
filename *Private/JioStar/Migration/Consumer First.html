@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-*Private/JioStar/Migration/Consumer First" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">Consumer First | Irtebat&#x27;s Second Brain</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://irtebat.github.io/*Private/JioStar/Migration/Consumer First"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Consumer First | Irtebat&#x27;s Second Brain"><meta data-rh="true" name="description" content="Migration"><meta data-rh="true" property="og:description" content="Migration"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://irtebat.github.io/*Private/JioStar/Migration/Consumer First"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/JioStar/Migration/Consumer First" hreflang="en"><link data-rh="true" rel="alternate" href="https://irtebat.github.io/*Private/JioStar/Migration/Consumer First" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.d0226fa2.css">
+<script src="/assets/js/runtime~main.ab72de78.js" defer="defer"></script>
+<script src="/assets/js/main.a62294d4.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/">Home</a><a class="navbar__item navbar__link" href="/about">About Me</a><a class="navbar__item navbar__link" href="/concepts">Concepts</a><a class="navbar__item navbar__link" href="/playbooks">Playbooks</a><a class="navbar__item navbar__link" href="/system-design">System Design</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input searchInput_YFbd" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><main class="docMainContainer_TBSr docMainContainerEnhanced_lQrH"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><div class="theme-doc-markdown markdown"><header><h1>Consumer First</h1></header><p><strong>Migration</strong></p>
+<p>Setup Cluster Linking : sync data + offsets</p>
+<ul>
+<li class="">Resources Shared</li>
+</ul>
+<p>Migrate consumers</p>
+<ul>
+<li class="">
+<p>Stop the consumer.</p>
+</li>
+<li class="">
+<p>Update bootstrap endpoints and other relevant configs to point to CC.</p>
+</li>
+<li class="">
+<p><em>Ensure offsets are synced (use a utility to assist).</em></p>
+</li>
+<li class="">
+<p>Restart the consumer against CC.</p>
+</li>
+</ul>
+<p>Migrate producers</p>
+<ul>
+<li class="">
+<p>Stop the producer</p>
+</li>
+<li class="">
+<p><em>Promote the mirror topic</em></p>
+<ul>
+<li class="">
+<p>This step enforces that replication lag is zero before writes are permitted</p>
+</li>
+<li class="">
+<p><em>You can confirm there is no replication lag via the Cluster Link metrics</em></p>
+<ul>
+<li class="">io.confluent.kafka.server/cluster_link_mirror_topic_offset_lag</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="">
+<p>Update bootstrap endpoints and other relevant configs</p>
+</li>
+<li class="">
+<p>Restart the producer against CC</p>
+</li>
+</ul>
+<p><strong>Rollback:</strong><br>
+<!-- -->Let’s assume we have 5 Consumer Groups: CG-1 through CG-5.Suppose CG-1, CG-2, and CG-3 have been migrated to CC, while the remaining continue on-prem. If an issue arises that necessitates rolling back these three consumer groups to the on-prem Kafka cluster, the requirement is to retain their consumer offsets as tracked in CC, and reflect those offsets accurately on-prem to avoid re-reading data.Since bidirectional cluster linking is not supported b/w OSK and CC, we cannot rely on automatic offset sync from CC to on-prem.One approach I would recommend is to perform a controlled rollback as follows: ( we can perform these programmatically ):</p>
+<ul>
+<li class="">
+<p>Fetch offsets of CG-1, CG-2, and CG-3 from CC</p>
+</li>
+<li class="">
+<p>Apply the fetched offsets to the on-prem cluster</p>
+</li>
+</ul>
+<p>A reusable utility tool built using Kafka SDKs can automate these steps.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Irtebat's Brain Comics • Printed in the Cloud.</div></div></div></footer></div>
+</body>
+</html>
