@@ -1,41 +1,12 @@
 ---
-title: JUnit 5 Cheatsheet
+title: JUnit 5 Templates & Cheatsheet
 ---
 
-# JUnit 5 Cheatsheet
+# JUnit 5 Templates & Cheatsheet
 
-## Adding JUnit 5 Dependency
+## Quick Reference
 
-### Maven
-
-Add the following to your `pom.xml`:
-
-```xml
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter</artifactId>
-    <version>5.10.0</version>
-    <scope>test</scope>
-</dependency>
-```
-
-### Gradle
-
-Add the following to your `build.gradle`:
-
-```groovy
-test {
-    useJUnitPlatform()
-}
-
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-}
-```
-
-## Imports
-
-Common imports used in JUnit 5 tests.
+### Common Imports
 
 ```java
 import org.junit.jupiter.api.Test;
@@ -43,130 +14,266 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.*;
 ```
 
-## Basic Annotations
+## Plug-and-Play Templates
 
-| Annotation | Description |
-| :--- | :--- |
-| `@Test` | Denotes that a method is a test method. |
-| `@BeforeEach` | Executed before each `@Test` method. |
-| `@AfterEach` | Executed after each `@Test` method. |
-| `@BeforeAll` | Executed once before all test methods in the class (must be static). |
-| `@AfterAll` | Executed once after all test methods in the class (must be static). |
-| `@Disabled` | Disables a test class or method. |
-| `@DisplayName` | Declares a custom display name for the test class or method. |
-
-## Assertions (Assertions class)
-
-All assertions are static methods in `org.junit.jupiter.api.Assertions`.
+### Basic Test Template
 
 ```java
-@Test
-void testAssertions() {
-    assertEquals(4, 2 + 2, "Optional failure message");
-    assertNotEquals(3, 2 + 2);
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculatorTest {
     
-    assertTrue(5 > 4);
-    assertFalse(5 < 4);
-    
-    assertNull(null);
-    assertNotNull("value");
-    
-    assertSame(obj1, obj1); // Checks reference identity
-    assertNotSame(obj1, obj2);
-    
-    assertArrayEquals(new int[]{1, 2}, new int[]{1, 2});
-    
-    // Check for Exceptions
-    assertThrows(IllegalArgumentException.class, () -> {
-        throw new IllegalArgumentException("Error");
-    });
-    
-    // Grouped Assertions (all executed even if one fails)
-    assertAll("person",
-        () -> assertEquals("John", person.getFirstName()),
-        () -> assertEquals("Doe", person.getLastName())
-    );
+    @Test
+    @DisplayName("Should add two numbers correctly")
+    void add_TwoNumbers_ReturnsSum() {
+        // Arrange
+        Calculator calculator = new Calculator();
+        int a = 5;
+        int b = 3;
+        
+        // Act
+        int result = calculator.add(a, b);
+        
+        // Assert
+        assertEquals(8, result);
+    }
 }
 ```
 
-## Assumptions (Assumptions class)
-
-Used to abort tests if conditions are not met (e.g., integration tests depending on environment).
+### Test with Setup/Teardown
 
 ```java
-@Test
-void testOnlyOnCiServer() {
-    assumeTrue(System.getenv("CI") != null);
-    // remainder of test...
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class DatabaseTest {
+    private Database db;
+    
+    @BeforeEach
+    void setUp() {
+        db = new Database();
+        db.connect();
+    }
+    
+    @AfterEach
+    void tearDown() {
+        db.disconnect();
+    }
+    
+    @Test
+    void testQuery() {
+        // Test implementation
+        assertNotNull(db.query("SELECT * FROM users"));
+    }
 }
 ```
 
-## Parameterized Tests
+### Exception Testing Template
 
-Requires `junit-jupiter-params` dependency.
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-### Single Parameter
+class ValidatorTest {
+    
+    @Test
+    @DisplayName("Should throw exception for invalid input")
+    void validate_InvalidInput_ThrowsException() {
+        // Arrange
+        Validator validator = new Validator();
+        
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            validator.validate(null);
+        });
+        
+        // Verify exception message
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            validator.validate("");
+        });
+        assertEquals("Input cannot be empty", exception.getMessage());
+    }
+}
+```
+
+### Parameterized Test Template
 
 ```java
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-@ParameterizedTest
-@ValueSource(strings = { "racecar", "radar", "able was I ere I saw elba" })
-void palindromes(String candidate) {
-    assertTrue(StringUtils.isPalindrome(candidate));
-}
-```
-
-### Multiple Parameters (CSV)
-
-```java
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ParameterizedTest
-@CsvSource({
-    "apple,         5",
-    "banana,        6",
-    "'lemon, lime', 10"
-})
-void testWithCsvSource(String fruit, int rank) {
-    assertNotNull(fruit);
-    assertNotEquals(0, rank);
+class StringUtilsTest {
+    
+    @ParameterizedTest
+    @ValueSource(strings = {"racecar", "radar", "level"})
+    void isPalindrome_ValidPalindromes_ReturnsTrue(String input) {
+        assertTrue(StringUtils.isPalindrome(input));
+    }
+    
+    @ParameterizedTest
+    @CsvSource({
+        "2, 3, 5",
+        "10, 20, 30",
+        "-5, 5, 0"
+    })
+    void add_TwoNumbers_ReturnsSum(int a, int b, int expected) {
+        Calculator calc = new Calculator();
+        assertEquals(expected, calc.add(a, b));
+    }
 }
 ```
 
-### Multiple Parameters (Method Source)
-
-For more complex data, use a method source.
+### Multiple Assertions Template
 
 ```java
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.Arguments;
-import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ParameterizedTest
-@MethodSource("provideStringsForIsBlank")
-void isBlank_ShouldReturnTrueForNullOrBlankStrings(String input, boolean expected) {
-    assertEquals(expected, Strings.isBlank(input));
-}
-
-private static Stream<Arguments> provideStringsForIsBlank() {
-    return Stream.of(
-      Arguments.of(null, true),
-      Arguments.of("", true),
-      Arguments.of("  ", true),
-      Arguments.of("not blank", false)
-    );
+class PersonTest {
+    
+    @Test
+    void createPerson_ValidData_AllFieldsSet() {
+        // Arrange
+        Person person = new Person("John", "Doe", 30);
+        
+        // Assert - All assertions run even if one fails
+        assertAll("person",
+            () -> assertEquals("John", person.getFirstName()),
+            () -> assertEquals("Doe", person.getLastName()),
+            () -> assertEquals(30, person.getAge())
+        );
+    }
 }
 ```
+
+### Test with Assumptions
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assumptions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class IntegrationTest {
+    
+    @Test
+    void testOnlyOnCiServer() {
+        // Skip test if condition not met
+        assumeTrue(System.getenv("CI") != null);
+        
+        // Test implementation
+        assertTrue(true);
+    }
+}
+```
+
+## Common Assertions
+
+```java
+// Equality
+assertEquals(expected, actual);
+assertEquals(expected, actual, "Custom message");
+assertNotEquals(unexpected, actual);
+
+// Boolean
+assertTrue(condition);
+assertFalse(condition);
+
+// Null checks
+assertNull(value);
+assertNotNull(value);
+
+// Object identity
+assertSame(expected, actual);
+assertNotSame(unexpected, actual);
+
+// Arrays
+assertArrayEquals(expectedArray, actualArray);
+
+// Exceptions
+assertThrows(ExceptionClass.class, () -> {
+    // code that throws exception
+});
+
+// Multiple assertions
+assertAll("group name",
+    () -> assertEquals(1, value1),
+    () -> assertEquals(2, value2)
+);
+```
+
+## Steps to Run Tests
+
+### Command Line (Maven)
+
+```bash
+# Run all tests
+mvn test
+
+# Run specific test class
+mvn test -Dtest=CalculatorTest
+
+# Run specific test method
+mvn test -Dtest=CalculatorTest#add_TwoNumbers_ReturnsSum
+
+# Run with verbose output
+mvn test -X
+```
+
+### Command Line (Gradle)
+
+```bash
+# Run all tests
+./gradlew test
+
+# Run specific test class
+./gradlew test --tests CalculatorTest
+
+# Run specific test method
+./gradlew test --tests CalculatorTest.add_TwoNumbers_ReturnsSum
+
+# Run with verbose output
+./gradlew test --info
+```
+
+### IDE (IntelliJ IDEA)
+
+1. Right-click on test class → **Run 'TestClassName'**
+2. Click green arrow next to test method
+3. Use keyboard shortcut: `Ctrl+Shift+F10` (Windows/Linux) or `Cmd+Shift+R` (Mac)
+4. Run all tests: `Ctrl+Shift+F10` on test directory
+
+### IDE (Eclipse)
+
+1. Right-click on test class → **Run As** → **JUnit Test**
+2. Click green play button in toolbar
+3. Use keyboard shortcut: `Alt+Shift+X, T`
+
+## Annotations Reference
+
+| Annotation | Description |
+| :--- | :--- |
+| `@Test` | Marks a method as a test method |
+| `@BeforeEach` | Executed before each test method |
+| `@AfterEach` | Executed after each test method |
+| `@BeforeAll` | Executed once before all tests (must be static) |
+| `@AfterAll` | Executed once after all tests (must be static) |
+| `@DisplayName` | Custom display name for test |
+| `@Disabled` | Disables a test |
+| `@ParameterizedTest` | Marks a parameterized test |
+| `@ValueSource` | Provides single parameter values |
+| `@CsvSource` | Provides CSV parameter values |
 
 ## Useful Links
 

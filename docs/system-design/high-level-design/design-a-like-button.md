@@ -1,7 +1,6 @@
 ---
 title: Design a like button
 ---
-
 # Design a Like Button
 
 ## Overview
