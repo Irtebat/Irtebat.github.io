@@ -3,6 +3,7 @@ sidebar_position: 0
 slug: /
 title: ""
 sidebar_label: "Home"
+description: "Irtebat's Second Brain — a digital garden of mental models, playbooks, and deep dives."
 hide_table_of_contents: true
 ---
 
