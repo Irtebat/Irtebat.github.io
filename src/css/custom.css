@@ -1,0 +1,837 @@
+/**
+ * Irtebat's Second Brain - Creative Editorial
+ * Constrained layout, rich cards, polished typography
+ */
+
+/* ============================================================================
+   FONTS
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&family=Bangers&family=Oswald:wght@400;500;700&display=swap');
+
+:root {
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-comic-heading: 'Bangers', cursive;
+  --font-comic-body: 'Oswald', sans-serif;
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', monospace;
+}
+
+/* ============================================================================
+   ROOT VARIABLES
+   ========================================================================= */
+
+:root {
+  /* Primary Blue Accent */
+  --ifm-color-primary: #2563eb; /* Blue 600 */
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-light: #3b82f6;
+  
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc; /* Very subtle cool gray */
+  
+  --ifm-font-color-base: #0f172a; /* Slate 900 */
+  --ifm-font-color-secondary: #475569; /* Slate 600 */
+  --ifm-font-color-tertiary: #94a3b8;
+  
+  --border-color: #e2e8f0;
+  --ifm-navbar-height: 4rem;
+  
+  /* Layout Constraints */
+  --content-max-width: 900px;
+  
+  /* Sidebar Width */
+  --doc-sidebar-width: 240px !important;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa; /* Blue 400 */
+  --ifm-background-color: #020617; /* Slate 950 */
+  --ifm-background-surface-color: #0f172a;
+  --ifm-font-color-base: #f8fafc;
+  --ifm-font-color-secondary: #94a3b8;
+  --border-color: #1e293b;
+}
+
+/* ============================================================================
+   LAYOUT
+   ========================================================================= */
+
+body {
+  background-color: var(--ifm-background-color);
+  background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+  background-size: 30px 30px; /* Halftone dot pattern */
+}
+
+.main-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.home-container {
+  max-width: 1200px; /* Wider for the grid */
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Aggressively Hide "Home" title */
+.home-container article > header,
+.home-container .markdown > h1:first-child,
+.home-container h1#home {
+  display: none !important;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ========================================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ifm-font-color-base);
+}
+
+h1 {
+  font-size: 2.5rem; /* Normalized size */
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 3.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+p, li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ifm-font-color-secondary);
+}
+
+/* ============================================================================
+   NAVBAR
+   ========================================================================= */
+
+.navbar {
+  background: var(--ifm-background-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+/* Hide Navbar Brand Title */
+.navbar__brand {
+  display: none; 
+}
+
+/* But show logo if it exists */
+.navbar__logo {
+  display: block;
+  margin-right: 1rem;
+}
+
+.navbar__link {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.navbar__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* ============================================================================
+   SIDEBAR & TOC
+   ========================================================================= */
+
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--border-color);
+  background-color: var(--ifm-background-color);
+  /* Ensure sidebar container doesn't shift based on content */
+  align-self: flex-start;
+}
+
+
+.menu__link {
+  border-radius: 6px;
+  color: var(--ifm-font-color-secondary);
+  font-weight: 400;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+}
+
+.menu__link:hover {
+  background-color: var(--ifm-background-surface-color);
+  color: var(--ifm-color-primary);
+}
+
+.menu__link--active {
+  background-color: rgba(37, 99, 235, 0.08); /* Blue tint */
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Table of Contents (Right Sidebar) */
+.table-of-contents {
+  font-size: 0.8rem;
+  border-left: 1px solid var(--border-color);
+}
+
+.table-of-contents__link {
+  padding: 0.2rem 0 0.2rem 1rem;
+  color: var(--ifm-font-color-tertiary);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+  border-left: 2px solid var(--ifm-color-primary);
+}
+
+/* ============================================================================
+   COMIC HOMEPAGE STYLES
+   ========================================================================= */
+
+.comic-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.comic-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+/* Jagged background behind title */
+.comic-header::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  width: 110%;
+  height: 150%;
+  background: radial-gradient(circle, var(--ifm-background-surface-color) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.comic-header h1 {
+  font-family: var(--font-comic-heading);
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 0.85;
+  letter-spacing: 2px;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 0px var(--ifm-background-color), 6px 6px 0px var(--ifm-font-color-base);
+}
+
+.comic-header .highlight {
+  color: var(--ifm-color-primary);
+  display: block;
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  text-shadow: 6px 6px 0px var(--ifm-font-color-base);
+  transform: rotate(-2deg) skew(-5deg);
+  margin-top: 0.5rem;
+}
+
+[data-theme='dark'] .comic-header .highlight {
+  text-shadow: 6px 6px 0px #000;
+}
+
+.comic-header p {
+  font-family: var(--font-comic-body);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ifm-font-color-secondary);
+  font-weight: 700;
+  background: var(--ifm-background-surface-color);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--ifm-font-color-base);
+  box-shadow: 4px 4px 0px var(--border-color);
+  transform: rotate(1deg);
+}
+
+.comic-section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 1rem;
+}
+
+.comic-section-header h2 {
+  font-family: var(--font-comic-body);
+  font-size: 2rem;
+  margin: 0;
+  border: none;
+  padding: 0.5rem 1rem;
+  background: var(--ifm-font-color-base);
+  color: var(--ifm-background-color);
+  transform: skew(-10deg);
+  box-shadow: 5px 5px 0px var(--ifm-color-primary);
+}
+
+.comic-line {
+  height: 4px;
+  background: var(--ifm-font-color-base);
+  flex-grow: 1;
+  position: relative;
+}
+
+.comic-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--ifm-color-primary);
+  border: 2px solid var(--ifm-font-color-base);
+  transform: rotate(45deg);
+}
+
+.comic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding-bottom: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Responsive: 1 column on smaller screens */
+@media (max-width: 768px) {
+  .comic-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comic-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-font-color-base);
+  border-radius: 0; /* Sharp corners for comic feel */
+  box-shadow: 6px 6px 0px var(--ifm-font-color-base);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none !important;
+  aspect-ratio: 2/3;
+  overflow: visible;
+  transform: rotate(0deg);
+}
+
+.comic-card:hover {
+  transform: translate(-3px, -3px) rotate(-1deg) scale(1.02);
+  box-shadow: 9px 9px 0px var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  z-index: 10;
+}
+
+.comic-card-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 2px solid var(--ifm-font-color-base);
+  background: var(--ifm-background-color);
+  font-family: var(--font-comic-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ifm-font-color-base);
+}
+
+.comic-card-visual {
+  flex-grow: 1;
+  background: var(--card-color, #e2e8f0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Comic Pattern overlay - Halftone */
+.comic-card-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.2) 20%, transparent 20%);
+  background-size: 8px 8px;
+  opacity: 0.6;
+}
+
+.comic-title {
+  font-family: var(--font-comic-heading);
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 2px 2px 0px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-align: center;
+  line-height: 0.9;
+  transform: rotate(-5deg);
+  z-index: 1;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.comic-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-comic-body);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  transform: rotate(5deg);
+  border: 2px solid #fff;
+  z-index: 2;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.comic-card-bottom {
+  background: var(--ifm-background-color);
+  padding: 1rem;
+  border-top: 2px solid var(--ifm-font-color-base);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.comic-card-bottom p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--ifm-font-color-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.read-btn {
+  font-family: var(--font-comic-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ifm-font-color-base);
+  margin-top: auto;
+  display: block;
+  padding: 0.4rem;
+  text-align: center;
+  background: var(--ifm-background-surface-color);
+  border: 2px solid var(--ifm-font-color-base);
+  transform: skew(-5deg);
+  transition: all 0.2s;
+}
+
+.comic-card:hover .read-btn {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border-color: #000;
+}
+
+/* Feature/Bio Box */
+.comic-feature-box {
+  background: var(--ifm-background-color);
+  border: 3px solid var(--ifm-font-color-base);
+  box-shadow: 8px 8px 0px var(--border-color);
+  padding: 2rem;
+  margin: 4rem 0;
+  position: relative;
+}
+
+.comic-feature-box p {
+  margin: 0 0 0 0;
+}
+
+.comic-feature-box h3 {
+  background: var(--ifm-font-color-base);
+  color: var(--ifm-background-color);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-comic-body);
+  text-transform: uppercase;
+  position: absolute;
+  top: -1.5rem;
+  left: 1rem;
+  transform: rotate(-2deg);
+}
+
+/* ============================================================================
+   UI ELEMENTS
+   ========================================================================= */
+
+/* Links */
+a {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+a:hover {
+  color: var(--ifm-color-primary);
+  border-bottom: 1px solid var(--ifm-color-primary);
+}
+
+.comic-card, .navbar__link, .menu__link {
+  border-bottom: none !important;
+}
+
+/* Admonitions */
+.admonition {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+  background-color: var(--ifm-background-surface-color);
+  margin: 2rem 0;
+  border-left: 4px solid var(--ifm-font-color-base);
+}
+
+.alert--info { border-left-color: var(--ifm-color-primary); }
+.alert--success { border-left-color: #10b981; }
+.alert--warning { border-left-color: #f59e0b; }
+.alert--danger { border-left-color: #ef4444; }
+
+.admonition-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Code Blocks */
+div[class^='codeBlockContainer'] {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+  background-color: var(--ifm-background-surface-color);
+}
+
+/* Tables */
+table {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+thead tr {
+  background-color: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ============================================================================
+   IMAGES
+   ========================================================================= */
+
+img {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* ============================================================================
+   PROFILE PAGE
+   ========================================================================= */
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.profile-header {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .comic-resume-btn-small {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.profile-image-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--ifm-font-color-base);
+  box-shadow: 8px 8px 0px var(--border-color);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info p {
+  margin: 0 0 0 0;
+}
+
+.profile-name {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--ifm-color-primary);
+  margin-top: 0;
+  border: none;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.comic-resume-btn-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-family: var(--font-comic-body);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ifm-font-color-base);
+  padding: 0.75rem 2rem;
+  background: var(--ifm-background-surface-color);
+  border: 3px solid var(--ifm-font-color-base);
+  box-shadow: 6px 6px 0px var(--ifm-font-color-base);
+  text-decoration: none !important;
+  transform: rotate(-2deg);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.1em;
+  border-bottom: 3px solid var(--ifm-font-color-base) !important;
+  margin-top: 0.5rem;
+}
+
+.comic-resume-btn-small:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 8px 8px 0px var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
+  border-bottom: 3px solid var(--ifm-color-primary) !important;
+}
+
+.profile-socials {
+  margin-top: 1.5rem;
+  font-family: var(--font-comic-body);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+.profile-socials a {
+  color: var(--ifm-font-color-base);
+  border-bottom: 1px solid var(--ifm-font-color-base);
+}
+
+.profile-socials a:hover {
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.section-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--ifm-font-color-base);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  display: inline-block;
+  background: var(--ifm-background-surface-color);
+  padding-right: 1rem;
+  padding-left: 1rem;
+  transform: skew(-5deg);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.experience-item {
+  margin-bottom: 2.5rem;
+  border-left: 2px solid var(--border-color);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.experience-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--ifm-font-color-base);
+  border-radius: 50%;
+}
+
+/* Grouped Experience for multiple roles */
+.experience-group {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 3rem;
+  padding-bottom: 0.5rem;
+}
+
+/* The Timeline Line - starts below title */
+.experience-group::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2.2rem; /* Starts below the company title */
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.experience-group::before {
+  display: none;
+}
+
+.experience-company-title {
+  font-family: var(--font-comic-body);
+  font-size: 1.4rem;
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+  margin-left: -1.5rem; /* Align flush left with the border */
+}
+
+.experience-sub-item {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.experience-sub-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Indicator for sub-roles */
+.experience-sub-item::before {
+  content: '';
+  position: absolute;
+  left: -1.6rem; /* Align with the main line */
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  background: var(--ifm-color-primary); /* Using primary color for sub-dots */
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--ifm-background-color); /* White ring to separate from line */
+  z-index: 1;
+}
+
+.experience-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.experience-role-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+}
+
+.experience-sub-date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-tertiary);
+}
+
+.experience-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ifm-font-color-secondary);
+  margin: 0;
+}
+
+.experience-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.experience-role {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ifm-font-color-base);
+}
+
+.experience-company {
+  font-family: var(--font-comic-body);
+  font-size: 1rem;
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.experience-date {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-tertiary);
+  margin-bottom: 1rem;
+}
+
+.experience-details {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.experience-details li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
