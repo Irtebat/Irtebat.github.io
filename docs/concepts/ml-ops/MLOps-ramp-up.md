@@ -1,10 +1,7 @@
 ---
 sidebar_position: 0
 ---
-
-## Day 1 — What MLOps Is and Why ML Fails in Production
-
-### Primary (Must Read)
+### Primary
 
 1. **Hidden Technical Debt in Machine Learning Systems**  
     Google Research  

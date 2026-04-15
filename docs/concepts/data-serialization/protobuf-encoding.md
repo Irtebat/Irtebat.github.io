@@ -1,8 +1,6 @@
 ---
 sidebar_position: 0
 ---
-
-
 # Protobuf Encoding
 
 ## What is Protobuf?

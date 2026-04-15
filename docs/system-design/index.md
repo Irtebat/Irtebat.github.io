@@ -4,9 +4,8 @@ sidebar_position: 0
 
 # System Design
 
-Technical deep dives into complex topics and systems. Detailed explorations of architectures, patterns, and implementations.
+Technical deep dives into architectures, patterns, and implementations: how pieces fit together and why common designs look the way they do.
 
-## Overview
+## Index
 
-This section contains in-depth technical explorations of various systems, architectures, and patterns.
-
+* [**Content-defined chunking with Rabin fingerprinting**](./content-defined-chunking-wth-rabin-fingerprinting.md) - Split files on content-sensitive boundaries, deduplicate chunks in object storage, version files with manifests—rolling hashes for cuts, SHA-256 for identity.
