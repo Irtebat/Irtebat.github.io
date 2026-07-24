@@ -1,5 +1,5 @@
 ---
-title: Python Exception Handling Cheatsheet
+sidebar_position: 5
 ---
 
 # Python Exception Handling Cheatsheet

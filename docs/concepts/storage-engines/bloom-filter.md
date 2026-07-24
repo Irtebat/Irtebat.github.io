@@ -1,9 +1,9 @@
 ---
-sidebar_position: 8
+sidebar_position: 4
 ---
 # Bloom Filter
 
-A compact bit array plus several hash functions. Membership tests are probabilistic: a “maybe present” can be wrong; “definitely not present” is always correct (for the set the filter was built from).
+A compact bit array plus several hash functions. Membership tests are probabilistic: a “maybe present” can be wrong; “not present” is always correct (for the set the filter was built from).
 
 *Examples:* SSTable metadata in LSM stores (RocksDB, Cassandra), CDNs, databases avoiding disk reads on cold keys
 
