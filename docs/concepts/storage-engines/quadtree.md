@@ -32,6 +32,6 @@ Real-world places quadtrees show up:
 
 ## My implementation
 
-Placeholder link to my GitHub repo for the quadtree:
+Link to my GitHub repo for the quadtree:
 
 [github.com/Irtebat/indexes-from-scratch/tree/main/quad-tree](https://github.com/Irtebat/indexes-from-scratch/tree/main/quad-tree)
