@@ -32,4 +32,5 @@ yarn-error.log*
 
 docusaurus
 
-**/*Private/
+docs/\*private/s
+docs/researchPrivate/

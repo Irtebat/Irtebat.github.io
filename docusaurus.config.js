@@ -40,7 +40,8 @@ const config = {
           routeBasePath: '/',
           editUrl: undefined,
           exclude: [
-            '**/*Private/**',
+            'private/**',
+            'researchPrivate/**',
             '**/.obsidian/**',
           ],
         },
