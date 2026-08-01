@@ -36,10 +36,15 @@ The number of pointers in a B+ tree is determined by the order of the tree and
 Say, for a B+ tree of order m
 
 **Internal Nodes**
-- Max Pointers: m
-- Min Pointers: m/2 child pointers (to ensure a 50% fill rate).
-- Root Exception: The root can have a minimum of 2 child pointers.
+- Max children : m
+- Max keys: m − 1
+- Min children (non-root): ceil(m / 2)
+- Min keys (non-root): ceil(m / 2) − 1
+- Root exception:
+- - If root is not a leaf : minimum 2 children
+- - If root is a leaf : it can have 1 key
 
 **Leaf Nodes**
-- Data Pointers: Up to m-1 pointers for each data record/key.
-- Sequence Pointer: Exactly 1 additional pointer that links to the next leaf node (enabling  range queries).
+- Max keys : m − 1
+- Min keys: ceil((m − 1) / 2)
+- Each key maps to a record pointer (or stores the record inline) and a pointer to the next leaf node (for range scans)
