@@ -41,8 +41,8 @@ Say, for a B+ tree of order m
 - Min children (non-root): ceil(m / 2)
 - Min keys (non-root): ceil(m / 2) − 1
 - Root exception:
-- - If root is not a leaf : minimum 2 children
-- - If root is a leaf : it can have 1 key
+	- If root is not a leaf : minimum 2 children
+	- If root is a leaf : it can have 1 key
 
 **Leaf Nodes**
 - Max keys : m − 1
