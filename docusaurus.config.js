@@ -90,6 +90,12 @@ const config = {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'dataPlatforms',
+            position: 'left',
+            label: 'Data Platforms',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'playbooks',
             position: 'left',
             label: 'Playbooks',

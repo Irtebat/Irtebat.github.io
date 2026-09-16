@@ -61,15 +61,22 @@ export const ComicCard = ({ title, description, link, issue, color }) => (
       color="#ef4444"
     />
     <ComicCard 
-      title="SYSTEM DESIGN" 
+      title="DATA PLATFORMS" 
       issue="02"
+      description="How a platform is wired, governed, and operated."
+      link="/data-platforms"
+      color="#10b981"
+    />
+    <ComicCard 
+      title="SYSTEM DESIGN" 
+      issue="03"
       description="Go behind the scenes of massive scale! Deep dives into architecture, distributed systems, and the internals of modern tech."
       link="/system-design"
       color="#3b82f6"
     />
     <ComicCard 
       title="PLAYBOOKS" 
-      issue="03"
+      issue="04"
       description="Execute with precision! Actionable guides and step-by-step protocols for engineering leadership and ops."
       link="/playbooks"
       color="#f59e0b"
